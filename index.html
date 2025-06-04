@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FloriArte - Diseño y Venta de Flores</title>
+<style>
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background: #f4f7f9;
+  }
+  header {
+    background: linear-gradient(135deg, #85d8ce 0%, #3a93a5 100%);
+    color: white;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.2rem;
+  }
+  header p.lema {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.1rem;
+  }
+  nav {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  nav button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.4rem 0.7rem;
+    transition: background-color 0.3s ease;
+    border-radius: 6px;
+  }
+  nav button:hover,
+  nav button.active {
+    background-color: rgba(255,255,255,0.3);
+  }
+
+  main {
+    max-width: 960px;
+    margin: 2rem auto 4rem;
+    background: white;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  }
+  section {
+    display: none;
+    animation: fadeIn 0.6s ease forwards;
+  }
+  section.active {
+    display: block;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+    border-bottom: 2px solid #3a93a5;
+    padding-bottom: 0.3rem;
+    margin-top: 0;
+  }
+
+  /* Sección Inicio */
+  #inicio img.cover {
+    width: 100%;
+    border-radius: 12px;
+    max-height: 360px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(58,147,165,0.4);
+  }
+  #inicio .intro-text {
+    margin-top: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #2c3e50dd;
+    text-align: center;
+  }
+
+  /* Sección Nosotros */
+  #nosotros p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #34495edd;
+  }
+  #nosotros ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    color: #2c3e50cc;
+  }
+
+  /* Sección Ventas */
+  #ventas .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 1.5rem;
+  }
+  #ventas .product {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fafafa;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+  #ventas .product:hover {
+    transform: translateY(-6px);
+  }
+  #ventas img.product-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  #ventas h3 {
+    padding: 0.7rem 1rem 0.3rem;
+    color: #305f72;
+  }
+  #ventas p.description {
+    padding: 0 1rem 1rem;
+    color: #566c77;
+    font-size: 0.95rem;
+  }
+
+  /* Sección Contacto */
+  #contacto form {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #contacto label {
+    font-weight: 600;
+    color: #34495e;
+  }
+  #contacto input,
+  #contacto textarea {
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+    border: 1.8px solid #cfd8dd;
+    border-radius: 6px;
+    font-family: inherit;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+  }
+  #contacto input:focus,
+  #contacto textarea:focus {
+    outline: none;
+    border-color: #3a93a5;
+    box-shadow: 0 0 6px #3a93a5aa;
+  }
+  #contacto button {
+    background-color: #3a93a5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #contacto button:hover {
+    background-color: #27848a;
+  }
+  #contacto .info {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #34495ecc;
+    text-align: center;
+    line-height: 1.5;
+  }
+  #contacto .info a {
+    color: #3a93a5;
+    text-decoration: none;
+  }
+  #contacto .info a:hover {
+    text-decoration: underline;
+  }
+
+  /* Sección Proyecto de Lectura */
+  #proyecto-lectura .reading-list {
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+  #proyecto-lectura .reading-list ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0;
+  }
+  #proyecto-lectura .reading-list li {
+    list-style: none;
+  }
+
+  /* Interactive clickable cards for readings */
+  #proyecto-lectura .reading-list button {
+    background-color: #eaf3f6;
+    border: 2px solid #3a93a5;
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    width: 170px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #3a93a5;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+  }
+  #proyecto-lectura .reading-list button:hover,
+  #proyecto-lectura .reading-list button:focus {
+    background-color: #3a93a5;
+    color: white;
+    outline: none;
+    transform: scale(1.05);
+  }
+  #proyecto-lectura .reading-list button:focus-visible {
+    outline: 3px solid #27848a;
+  }
+  #proyecto-lectura .reading-detail {
+    border-top: 3px solid #3a93a5;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    max-width: 960px;
+  }
+  #proyecto-lectura h3 {
+    color: #2c3e50;
+    margin-bottom: 0.7rem;
+  }
+
+  /* Collages */
+  .collage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .collage-item {
+    background: #eaf3f6;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 180px;
+    box-shadow: 0 4px 12px rgba(58,147,165,0.15);
+    text-align: center;
+  }
+  .collage-item img {
+    max-width: 100%;
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 0.6rem;
+    border-radius: 8px;
+  }
+  .collage-item p {
+    font-size: 0.9rem;
+    color: #3a93a5;
+    font-weight: 600;
+  }
+  .collage-item.short-text {
+    font-style: italic;
+    font-weight: 500;
+    color: #577477;
+    font-size: 0.9rem;
+  }
+
+  .btn-comment {
+    display: inline-block;
+    background-color: #3a93a5;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .btn-comment:hover,
+  .btn-comment:focus {
+    background-color: #27848a;
+  }
+
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+    nav {
+      gap: 1rem;
+    }
+    nav button {
+      font-size: 0.9rem;
+      padding: 0.3rem 0.5rem;
+    }
+    main {
+      margin: 1rem 1rem 3rem;
+      padding: 1.5rem 1.5rem;
+    }
+    #ventas .product-list {
+      grid-template-columns: 1fr;
+    }
+    .collage-item {
+      width: 100%;
+    }
+    #proyecto-lectura .reading-list button {
+      width: 100%;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>FloriArte</h1>
+  <p class="lema">"Colores que hablan, flores que enamoran"</p>
+  <nav aria-label="Menú principal">
+    <button data-target="inicio" class="active" aria-current="page">Inicio</button>
+    <button data-target="nosotros">Nosotros</button>
+    <button data-target="ventas">Ventas</button>
+    <button data-target="contacto">Contacto</button>
+    <button data-target="proyecto-lectura">Proyecto de Lectura</button>
+  </nav>
+</header>
+
+<main>
+  <section id="inicio" class="active" tabindex="0" aria-label="Sección inicio">
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" alt="Ramo de flores colorido" class="cover" />
+    <p class="intro-text">
+      Bienvenido a FloriArte, tu espacio ideal para flores frescas y arreglos personalizados llenos de arte y amor. Descubre cómo la naturaleza y la creatividad se unen para embellecer tus momentos especiales.
+    </p>
+  </section>
+
+  <section id="nosotros" tabindex="0" aria-label="Sección nosotros">
+    <h2>Nosotros</h2>
+    <p>En FloriArte, somos un equipo apasionado por la naturaleza y la creatividad. Nuestra meta es acercarte la belleza de las flores con un toque artístico único.</p>
+    <p><strong>Misión:</strong> Ofrecer arreglos florales exclusivos que transmitan emociones y embellezcan cada ocasión.</p>
+    <p><strong>Visión:</strong> Ser reconocidos como los líderes en diseño floral creativo en nuestra comunidad y expandirnos con propuestas innovadoras.</p>
+    <p><strong>Valores:</strong></p>
+    <ul>
+      <li>Calidad y frescura en cada flor</li>
+      <li>Creatividad y originalidad en los diseños</li>
+      <li>Atención cercana y personalizada</li>
+      <li>Compromiso con el medio ambiente</li>
+    </ul>
+  </section>
+
+  <section id="ventas" tabindex="0" aria-label="Sección ventas o servicios">
+    <h2>Ventas</h2>
+    <div class="product-list">
+      <article class="product" tabindex="0" aria-label="Producto Bouquet Primavera">
+        <img class="product-img" src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQlFbd37PTMBQ-ToHw35Yd2FafQe53XfoieQgbpwOt6sJ6p8H5OionIaTWs7KkpJZQXQYe6GtFq0sdllcwzqJX_sgbU1nhqEtAKBRA3-cGkfiuK-sAal3xE" alt="Bouquet Primavera" />
+        <h3>Bouquet Primavera</h3>
+        <p class="description">Un ramo fresco con flores de temporada que alegran cualquier espacio con su colorido y aroma.</p>
+      </article>
+      <article class="product" tabindex="0" aria-label="Producto Centro de Mesa">
+        <img class="product-img" src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRmSaHQP9tGlc6oBCgd2o7YksQDkfITXyP3qjnJpVufMzhPbuk4YCdqhi_1RYVmwlUlSiGee6v3JnOiPuVcNFK31AOt-UXjH5NchLOrJjFtZQjVwv3wVaD0" alt="Centro de Mesa Elegante" />
+        <h3>Centro de Mesa Elegante</h3>
+        <p class="description">Diseños sofisticados para decorar tu mesa en eventos especiales con un toque de distinción.</p>
+      </article>
+      <article class="product" tabindex="0" aria-label="Producto Ramos Personalizados">
+        <img class="product-img" src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSVQ-s6W8lqJZUzxfBD3_Sx96rfBjyuLrmOVeKaJ80LWbC9X4qCSwGlip8M0Di5Gelr3j4g2QyYjFfbnaeZMyw3szhLPASW33N3N4uCRZtXCY6dE4AVmg3H" alt="Ramos Personalizados" />
+        <h3>Ramos Personalizados</h3>
+        <p class="description">Crea tu propio ramo con las flores favoritas para expresar exactamente lo que sientes.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="contacto" tabindex="0" aria-label="Sección contacto">
+    <h2>Contacto</h2>
+    <form id="contact-form" aria-label="Formulario de contacto">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required aria-required="true" />
+
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required aria-required="true" />
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí" required aria-required="true"></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+    <div class="info" aria-live="polite" id="contact-info">
+      <p>También puedes contactarnos en:</p>
+      <p>Email: <a href="mailto:contacto@floriarte.com">contacto@floriarte.com</a></p>
+      <p>Redes sociales: <a href="https://facebook.com/floriarte" target="_blank" rel="noopener noreferrer">Facebook</a> | <a href="https://instagram.com/floriarte" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+      <p>Visítanos en: Calle Flores 123, Ciudad Jardín</p>
+    </div>
+  </section>
+
+  <section id="proyecto-lectura" tabindex="0" aria-label="Sección proyecto de lectura">
+    <h2>Proyecto de Lectura</h2>
+    <div class="reading-list" aria-label="Lista de lecturas realizadas">
+      <ul>
+        <li>
+          <button type="button" data-reading="lectura1" aria-controls="reading-detail" aria-expanded="false" aria-describedby="link-lectura1">El Principito</button>
+          <a href="https://docs.google.com/document/d/1JZZHDxWZdmRY45vGzAz4P8ROr-0ZwiKqeOL0ZqLXL3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" id="link-lectura1" class="btn-comment" aria-label="Abrir comentario completo El Principito en nueva pestaña">👍</a>
+        </li>
+        <li>
+          <button type="button" data-reading="lectura2" aria-controls="reading-detail" aria-expanded="false" aria-describedby="link-lectura2">Cien Años de Soledad</button>
+          <a href="https://docs.google.com/document/d/1OcqHPwz3jJEDx10vSYOd6FEwdy_N4X_gG9o0oAMHkDw/edit?usp=sharing" target="_blank" rel="noopener noreferrer" id="link-lectura2" class="btn-comment" aria-label="Abrir comentario completo Cien Años de Soledad en nueva pestaña">👍</a>
+        </li>
+        <li>
+          <button type="button" data-reading="lectura3" aria-controls="reading-detail" aria-expanded="false" aria-describedby="link-lectura3">La Casa de los Espíritus</button>
+          <a href="https://docs.google.com/document/d/1o8scPA3wcVHoAbyuA_uA-AcZhrV4vYgyV8eGr_MlzBg/edit?usp=sharing" target="_blank" rel="noopener noreferrer" id="link-lectura3" class="btn-comment" aria-label="Abrir comentario completo La Casa de los Espíritus en nueva pestaña">👍</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="reading-detail" id="reading-detail" tabindex="0" aria-live="polite" aria-atomic="true">
+      <p><em>Selecciona el título de una lectura para ver el detalle.</em></p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Navegación del menú principal
+  const buttons = document.querySelectorAll('nav button');
+  const sections = document.querySelectorAll('main section');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const target = button.getAttribute('data-target');
+      buttons.forEach(btn => {
+        btn.classList.toggle('active', btn === button);
+        btn.setAttribute('aria-current', btn === button ? 'page' : 'false');
+      });
+      sections.forEach(secc => secc.classList.toggle('active', secc.id === target));
+      // Reset reading detail when project de lectura closed
+      if(target !== 'proyecto-lectura') {
+        resetReadingDetail();
+      }
+    });
+  });
+
+  // Proyecto de Lectura: detalles de cada lectura
+  const readingButtons = document.querySelectorAll('#proyecto-lectura .reading-list button');
+  const detailDiv = document.getElementById('reading-detail');
+
+  const readingsContent = {
+    lectura1: {
+      title: 'El Principito',
+      collageIdeas: [
+        {img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS4-MJYaTlRhZdMyNTqw7lffsxczToq4CiRGshPz2xCmEM8XaI1iUY6eVo-1atKzSQIPMyo56dQVfJchFM7do5Q5RrUaMeAYdhHSQfXX4Vqs9Xg8Dy6X1iOhJCuHKH9qRcXVFnwm7U&usqp=CAc', alt:'El Principito libro abierto', text:'El Principito - Libro Clásico'},
+      ]
+    },
+    lectura2: {
+      title: 'Cien Años de Soledad',
+      collageIdeas: [
+        {img: 'https://periodicocorreo.com.mx/__export/sites/correo/img/2024/04/23/glfbfkvwgaa4alo-364705198.jpg', alt:'Paisaje Macondo', text:'Macondo - Lugar Mágico'},
+      ]
+    },
+    lectura3: {
+      title: 'La Casa de los Espíritus',
+      collageIdeas: [
+        {img: 'https://cdn.culturagenial.com/es/imagenes/la-casa-de-los-espiritus-de-isabel-allende-og.jpg', alt:'Casa antigua', text:'Casa de la Familia'},
+      ]
+    }
+  };
+
+  function createCollageHTML(items) {
+    return items.map(item => {
+      if(item.img) {
+        return `<article class="collage-item" tabindex="0" aria-label="${item.text}">
+          <img src="${item.img}" alt="${item.alt}" />
+          <p>${item.text}</p>
+        </article>`;
+      } else {
+        // text only (phrase)
+        return `<article class="collage-item short-text" tabindex="0">${item.text}</article>`;
+      }
+    }).join('');
+  }
+
+  readingButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const readingId = btn.getAttribute('data-reading');
+      const reading = readingsContent[readingId];
+      if(!reading) return;
+      // Close all aria-expanded on buttons
+      readingButtons.forEach(b => b.setAttribute('aria-expanded', 'false'));
+      btn.setAttribute('aria-expanded', 'true');
+
+      detailDiv.innerHTML = `
+        <h3>${reading.title}</h3>
+        <h4>Idea Principal</h4>
+        <div class="collage" role="list">
+          ${createCollageHTML(reading.collageIdeas)}
+        </div>
+      `;
+      detailDiv.focus();
+    });
+  });
+
+  function resetReadingDetail() {
+    readingButtons.forEach(b => b.setAttribute('aria-expanded', 'false'));
+    detailDiv.innerHTML = `<p><em>Selecciona el título de una lectura para ver el detalle.</em></p>`;
+  }
+
+  // Contact form submission mock
+  const contactForm = document.getElementById('contact-form');
+  const contactInfo = document.getElementById('contact-info');
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    contactInfo.textContent = 'Gracias por contactarnos. Te responderemos pronto!';
+    contactForm.reset();
+  });
+</script>
+
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
